@@ -1,10 +1,17 @@
 package com.example.test_spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication(scanBasePackageClasses = {TestSpringApplication.Cat.class})
@@ -12,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestSpringApplication.class, args);
-        //System.out.println(collectClasses());
         collectClasses();
     }
 
@@ -49,5 +55,27 @@ public class TestSpringApplication {
         System.out.println(user.hello());
         System.out.println(userService.getSchedule(user).createSchedule());
         System.out.println(game.startGame());
+    }
+
+    @Controller
+    public class HelloWorldController {
+
+        @Autowired
+        private ApplicationContext applicationContext;
+
+        @RequestMapping("/hello")
+        public String hello(@RequestParam(value="key", required=false, defaultValue="World") String name, Model model) {
+
+            String[] beanNames = applicationContext.getBeanDefinitionNames();
+
+            for (String beanName : beanNames) {
+
+                System.out.println(beanName + " : " + applicationContext.getBean(beanName).getClass().toString());
+            }
+
+            model.addAttribute("name", name);
+
+            return "helloworld";
+        }
     }
 }

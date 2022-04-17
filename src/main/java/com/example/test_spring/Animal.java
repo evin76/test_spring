@@ -1,10 +1,25 @@
 package com.example.test_spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+
 //setter injection
 @Component
+@Profile("dev")
+@ConfigurationProperties("dev")
+//@ConditionalOnExpression("#{!environment.getProperty('spring.profiles.active').contains('default')}")
 public class Animal {
+
+    @Value("${dev.name}")
+    private String name;
 
     private Cat cat;
     private Dog dog;
@@ -15,6 +30,8 @@ public class Animal {
     }
 
     @Autowired
+    //@ConditionalOnProperty(prefix = "spring", name = "profile.active", value = "default", matchIfMissing = true)
+    @ConditionalOnExpression("#{!environment.getProperty('spring.profiles.active').contains('default')}")
     public void setDog(Dog dog){
         this.dog = dog;
     }
