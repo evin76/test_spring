@@ -1,12 +1,20 @@
 package com.example.test_spring;
 
+import com.example.test_spring.events.BasicEvent;
+import com.example.test_spring.events.BasicEventListener;
+import com.example.test_spring.events.EventPublisher;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +22,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication(scanBasePackageClasses = {TestSpringApplication.Cat.class})
+@SpringBootApplication(scanBasePackageClasses = {EventPublisher.class})
 @RestController
+@RequiredArgsConstructor
 public class TestSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestSpringApplication.class, args);
-        collectClasses();
+        //collectClasses();
+    }
+
+    @RequiredArgsConstructor
+    public class eventsTest{
+        final ApplicationEventPublisher applicationEventPublisher;
+
+        @Bean
+        public void basicMessage(){
+            //BasicEventListener eventListener = new BasicEventListener();
+            //eventListener.onApplicationEvent(new BasicEvent(applicationEventPublisher, "basic message"));
+            EventPublisher publisher = new EventPublisher(applicationEventPublisher);
+            publisher.publishCustomEvent("publish basic message");
+        }
+
+        @Bean
+        public void asyncMessage(){
+            EventPublisher publisher = new EventPublisher(applicationEventPublisher);
+            publisher.publishAsyncEvent("publish async message");
+        }
+
+        @Bean
+        public void transOneMessage(){
+            EventPublisher publisher = new EventPublisher(applicationEventPublisher);
+            publisher.publishTransOneEvent("publish trans one message");
+        }
+
+        @Bean
+        public void transTwoMessage(){
+            EventPublisher publisher = new EventPublisher(applicationEventPublisher);
+            publisher.publishTransTwoEvent("publish trans two message");
+        }
     }
 
     @GetMapping("/test")
@@ -38,6 +78,8 @@ public class TestSpringApplication {
     //@GetMapping("/classCreation")
     @Bean
     public static void collectClasses(){
+        //@Autowired
+        // publisher = null;
         UserService userService = new UserService();
         UserService.User user = userService.getUser();
 
