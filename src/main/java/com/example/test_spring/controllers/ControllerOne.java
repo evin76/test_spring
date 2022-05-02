@@ -29,7 +29,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class ControllerOne {
     private ObjectMapper objectMapper;
     public JsonTest jsonTest;
-    @RequestMapping(value = "/json/{price}/{date}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/json/price/{price}/info/{date}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<JsonTest> getJson(@PathVariable double price, @PathVariable String date) throws IOException {
         Random random = new Random();
