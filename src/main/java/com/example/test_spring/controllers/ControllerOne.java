@@ -31,7 +31,7 @@ public class ControllerOne {
     public JsonTest jsonTest;
     @RequestMapping(value = "/json/price/{price}/info/{date}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<JsonTest> getJson(@PathVariable double price, @PathVariable String date) throws IOException {
+    public ResponseEntity<JsonTest> getJson(@PathVariable String price, @PathVariable String date) throws IOException {
         Random random = new Random();
         int id = random.nextInt(50);
         jsonTest = new JsonTest();

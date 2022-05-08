@@ -1,5 +1,6 @@
 package com.example.test_spring;
 
+import com.example.test_spring.controllers.ControllerJson;
 import com.example.test_spring.controllers.ControllerOne;
 import com.example.test_spring.controllers.ControllerThree;
 import com.example.test_spring.controllers.ControllerTwo;
@@ -25,7 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication(scanBasePackageClasses = {EventPublisher.class, ControllerTwo.class, ControllerOne.class, ControllerThree.class})
+@SpringBootApplication(scanBasePackageClasses = {EventPublisher.class, ControllerTwo.class, ControllerOne.class, ControllerThree.class,
+        ControllerJson.class})
 @RestController
 @RequiredArgsConstructor
 public class TestSpringApplication {

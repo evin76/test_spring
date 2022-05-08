@@ -6,6 +6,6 @@ import java.util.HashMap;
 
 @Data
 public class JsonTest {
-    private double price;
+    private String price;
     private HashMap<String, String> info;
 }
