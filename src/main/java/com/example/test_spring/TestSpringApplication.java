@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication(scanBasePackageClasses = {EventPublisher.class, ControllerTwo.class, ControllerOne.class, ControllerThree.class,
-        ControllerJson.class, One.class, Two.class, TestSpringApplication.Aop.class})
+        ControllerJson.class, One.class, Two.class})
 @RestController
 @RequiredArgsConstructor
 public class TestSpringApplication {
@@ -40,10 +40,9 @@ public class TestSpringApplication {
         //collectClasses();
     }
 
-    @Controller
+    @RestController
     public class Aop{
-        @RequestMapping(value = "/aop", method = RequestMethod.GET)
-        @ResponseBody
+        @GetMapping("/aop")
         //@Bean
         public String getMessages(){
             One one = new One();
