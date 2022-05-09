@@ -1,5 +1,7 @@
 package com.example.test_spring;
 
+import com.example.test_spring.aop.One;
+import com.example.test_spring.aop.Two;
 import com.example.test_spring.controllers.ControllerJson;
 import com.example.test_spring.controllers.ControllerOne;
 import com.example.test_spring.controllers.ControllerThree;
@@ -27,13 +29,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication(scanBasePackageClasses = {EventPublisher.class, ControllerTwo.class, ControllerOne.class, ControllerThree.class,
-        ControllerJson.class})
+        ControllerJson.class, One.class, Two.class})
 @RestController
 @RequiredArgsConstructor
 public class TestSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestSpringApplication.class, args);
         //collectClasses();
+    }
+
+    public class Aop{
+        @Bean
+        public void getMessages(){
+            One one = new One();
+            one.hello();
+            //one.check();
+        }
     }
 
     @RequiredArgsConstructor
