@@ -10,11 +10,11 @@ public class Two implements Service{
     public String hello() {
         System.out.println("Hi from class Two");
 
-        ApplicationContext context
-                = new ClassPathXmlApplicationContext(
-                "beans.xml");
-        One one = context.getBean("one", One.class);
-        System.out.println("here is count " + one.getCount());
+        //ApplicationContext context
+                //= new ClassPathXmlApplicationContext(
+                //"beans.xml");
+        //One one = context.getBean("one", One.class);
+        //System.out.println("here is count " + one.getCount());
         return null;
     }
 }

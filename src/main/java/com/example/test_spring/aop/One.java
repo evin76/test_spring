@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 @PropertySource("classpath:aspect.properties")
 public class One implements Service{
 
@@ -17,7 +17,7 @@ public class One implements Service{
     @Override
     //@ConditionalOnExpression("#{environment.getProperty('aspect.count').contains(3)}")
     public String hello() {
-        System.out.println("Hi form class One " + this.count);
+        System.out.println("Hi form class One " + count);
         //int max = Integer.parseInt(env.getProperty("aspect.count").toString());
        /*for(int i = 0; i < 5; i++){
             count++;
@@ -26,7 +26,7 @@ public class One implements Service{
                 check();
             //}
         }*/
-        return "Hi form class One " + this.count;
+        return "Hi form class One " + count;
     }
 
     //@ConditionalOnExpression("#{!environment.getProperty('aspect.count').contains(3)}")
