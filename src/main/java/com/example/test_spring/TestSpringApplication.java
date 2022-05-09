@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication(scanBasePackageClasses = {EventPublisher.class, ControllerTwo.class, ControllerOne.class, ControllerThree.class,
-        ControllerJson.class, One.class, Two.class})
+        ControllerJson.class, One.class, Two.class, TestSpringApplication.Aop.class})
 @RestController
 @RequiredArgsConstructor
 public class TestSpringApplication {
@@ -38,11 +38,13 @@ public class TestSpringApplication {
         //collectClasses();
     }
 
+    @Controller
     public class Aop{
-        @Bean
-        public void getMessages(){
+        @RequestMapping("/aop")
+        //@Bean
+        public String getMessages(){
             One one = new One();
-            one.hello();
+            return one.hello();
             //one.check();
         }
     }

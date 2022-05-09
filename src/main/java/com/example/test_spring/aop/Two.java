@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Two implements Service{
     @Override
-    public void hello() {
+    public String hello() {
         System.out.println("Hi from class Two");
 
         ApplicationContext context
@@ -15,5 +15,6 @@ public class Two implements Service{
                 "beans.xml");
         One one = context.getBean("one", One.class);
         System.out.println("here is count " + one.getCount());
+        return null;
     }
 }
