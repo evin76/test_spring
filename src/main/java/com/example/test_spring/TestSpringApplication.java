@@ -9,6 +9,7 @@ import com.example.test_spring.controllers.ControllerTwo;
 import com.example.test_spring.events.BasicEvent;
 import com.example.test_spring.events.BasicEventListener;
 import com.example.test_spring.events.EventPublisher;
+import com.example.test_spring.security.SecurityController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -31,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication(scanBasePackageClasses = {EventPublisher.class, ControllerTwo.class, ControllerOne.class, ControllerThree.class,
-        ControllerJson.class, One.class, Two.class})
+        ControllerJson.class, One.class, Two.class, SecurityController.class})
 @RestController
 @RequiredArgsConstructor
 public class TestSpringApplication {
