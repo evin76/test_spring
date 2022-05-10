@@ -24,6 +24,27 @@ class CustomControllerAdvice {
         );
     }
 
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<ErrorResponse> handleExceptionInAspect(
+            Exception e
+    ) {
+        HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;
+
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        e.printStackTrace(printWriter);
+        String stackTrace = stringWriter.toString();
+
+        return new ResponseEntity<>(
+                new ErrorResponse(
+                        status,
+                        e.getMessage(),
+                        stackTrace
+                ),
+                status
+        );
+    }
+
     // fallback method
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleExceptions(

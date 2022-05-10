@@ -9,12 +9,6 @@ public class Two implements Service{
     @Override
     public String hello() {
         System.out.println("Hi from class Two");
-
-        //ApplicationContext context
-                //= new ClassPathXmlApplicationContext(
-                //"beans.xml");
-        //One one = context.getBean("one", One.class);
-        //System.out.println("here is count " + one.getCount());
-        return null;
+        return "Hi from class Two";
     }
 }

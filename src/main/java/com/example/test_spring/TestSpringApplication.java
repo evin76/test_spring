@@ -37,17 +37,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestSpringApplication.class, args);
-        //collectClasses();
     }
 
     @RestController
+    @RequiredArgsConstructor
     public class Aop{
-        @GetMapping("/aop")
-        //@Bean
-        public String getMessages(){
-            One one = new One();
+        private final One one;
+        private final Two two;
+        @GetMapping("/aop/one")
+        public String getMessagesOne(){
             return one.hello();
-            //one.check();
+        }
+
+        @GetMapping("/aop/two")
+        public String getMessagesTwo(){
+            return two.hello();
         }
     }
 
@@ -98,8 +102,6 @@ public class TestSpringApplication {
     //@GetMapping("/classCreation")
     @Bean
     public static void collectClasses(){
-        //@Autowired
-        // publisher = null;
         UserService userService = new UserService();
         UserService.User user = userService.getUser();
 
