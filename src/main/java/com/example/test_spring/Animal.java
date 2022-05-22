@@ -15,7 +15,6 @@ import javax.annotation.PostConstruct;
 @Component
 @Profile("dev")
 @ConfigurationProperties("dev")
-//@ConditionalOnExpression("#{!environment.getProperty('spring.profiles.active').contains('default')}")
 public class Animal {
 
     @Value("${dev.name}")
@@ -30,7 +29,6 @@ public class Animal {
     }
 
     @Autowired
-    //@ConditionalOnProperty(prefix = "spring", name = "profile.active", value = "default", matchIfMissing = true)
     @ConditionalOnExpression("#{!environment.getProperty('spring.profiles.active').contains('default')}")
     public void setDog(Dog dog){
         this.dog = dog;

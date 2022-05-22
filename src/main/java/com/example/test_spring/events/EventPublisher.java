@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Service
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EventPublisher {
     final ApplicationEventPublisher applicationEventPublisher;
 
-    //@RequestMapping("/basicEvent")
     public void publishCustomEvent(final String message){
         BasicEvent basicEvent = new BasicEvent(this, message);
         logEvent(basicEvent);
@@ -46,10 +43,8 @@ public class EventPublisher {
 
     private void logEvent(Object event) {
         if (event instanceof BasicEvent) {
-            //log.debug("eventName", ((BasicEvent) event).getMessage().getClass(), "event", ((BasicEvent) event).getMessage(), "publishing...");
             System.out.println("eventName " + ((BasicEvent) event).getMessage().getClass() + "event " + ((BasicEvent) event).getMessage() + " publishing...");
         } else {
-            //log.debug("eventName", event.getClass(), "event", event, "publishing ...");
             System.out.println("eventName " + event.getClass() + "event " + event + " publishing ...");
         }
     }
