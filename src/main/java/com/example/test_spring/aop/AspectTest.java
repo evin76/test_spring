@@ -4,11 +4,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
+@PropertySource("classpath:aspect.properties")
 public class AspectTest {
 
     @Value("${aspect.count}")
@@ -17,11 +18,8 @@ public class AspectTest {
 
     @Around("execution(* *(..)) && (within(One) || within(Two))")
     public Object timer(ProceedingJoinPoint point) throws Throwable {
-        //int count = 0;
-        this.count++;
-        System.out.println(constCount);
-        System.out.println(this.count);
-        if(this.count <= Integer.parseInt(constCount)) {
+        if(this.count <= Integer.parseInt(constCount) - 1) {
+            this.count++;
             return point.proceed();
         } else {
             String str = "Exceeded maximum method call";
