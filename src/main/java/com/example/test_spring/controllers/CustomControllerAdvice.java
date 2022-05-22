@@ -10,7 +10,7 @@ import java.io.StringWriter;
 
 @ControllerAdvice
 class CustomControllerAdvice {
-    @ExceptionHandler(ControllerTwoException.class) // exception handled
+    @ExceptionHandler(ControllerTwoException.class)
     public ResponseEntity<ErrorResponse> handleNullPointerExceptions(
             Exception e
     ) {
@@ -24,7 +24,6 @@ class CustomControllerAdvice {
         );
     }
 
-    // fallback method
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleExceptions(
             Exception e
