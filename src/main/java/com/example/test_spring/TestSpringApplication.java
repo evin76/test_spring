@@ -6,8 +6,6 @@ import com.example.test_spring.controllers.ControllerJson;
 import com.example.test_spring.controllers.ControllerOne;
 import com.example.test_spring.controllers.ControllerThree;
 import com.example.test_spring.controllers.ControllerTwo;
-import com.example.test_spring.events.BasicEvent;
-import com.example.test_spring.events.BasicEventListener;
 import com.example.test_spring.events.EventPublisher;
 import com.example.test_spring.security.SecurityController;
 import lombok.RequiredArgsConstructor;
@@ -15,20 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication(scanBasePackageClasses = {EventPublisher.class, ControllerTwo.class, ControllerOne.class, ControllerThree.class,
@@ -62,8 +53,6 @@ public class TestSpringApplication {
 
         @Bean
         public void basicMessage(){
-            //BasicEventListener eventListener = new BasicEventListener();
-            //eventListener.onApplicationEvent(new BasicEvent(applicationEventPublisher, "basic message"));
             EventPublisher publisher = new EventPublisher(applicationEventPublisher);
             publisher.publishCustomEvent("publish basic message");
         }
@@ -100,7 +89,6 @@ public class TestSpringApplication {
         }
     }
 
-    //@GetMapping("/classCreation")
     @Bean
     public static void collectClasses(){
         UserService userService = new UserService();

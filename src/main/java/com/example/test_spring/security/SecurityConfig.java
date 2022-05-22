@@ -51,12 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(supportPass)
                 .roles("SUPPORT")
                 .build();
-        /*
-        var user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("user")
-                .roles("SUPPORT", "ADMIN")
-                .build();*/
         return new InMemoryUserDetailsManager(admin, support);
     }
 }
