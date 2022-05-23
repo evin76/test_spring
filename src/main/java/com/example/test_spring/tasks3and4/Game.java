@@ -1,5 +1,6 @@
-package com.example.test_spring;
+package com.example.test_spring.tasks3and4;
 
+import com.example.test_spring.tasks3and4.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

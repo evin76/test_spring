@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,41 +49,6 @@ public class TestSpringApplication {
             EventPublisher publisher = new EventPublisher(applicationEventPublisher);
             publisher.publishTransTwoEvent("publish trans two message");
         }
-    }
-
-    @GetMapping("/test")
-    public static String test(){
-        return "Hi there";
-    }
-
-    @RestController
-    public static class Cat{
-        @GetMapping("/cat")
-        public String meow(){
-            return "meow";
-        }
-    }
-
-    //@GetMapping("/classCreation")
-    @Bean
-    public static void collectClasses(){
-        UserService userService = new UserService();
-        UserService.User user = userService.getUser();
-
-        Animal animal = new Animal();
-        Animal.Cat cat = new Animal.Cat();
-        Animal.Dog dog = new Animal.Dog();
-        animal.setCat(cat);
-        animal.setDog(dog);
-
-        Account account = new Account();
-        Game game = new Game(account);
-
-        System.out.println(animal.makeSound());
-        System.out.println(animal.bark());
-        System.out.println(user.hello());
-        System.out.println(userService.getSchedule(user).createSchedule());
-        System.out.println(game.startGame());
     }
 
     @Controller
