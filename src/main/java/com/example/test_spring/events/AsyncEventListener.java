@@ -10,7 +10,7 @@ public class AsyncEventListener {
 
     @EventListener
     @SneakyThrows
-    @Async
+    @Async("AsyncEvent")
     public void listenEvent(AsyncEvent event){
         Thread.sleep(1000);
         System.out.println(event.getMessage());

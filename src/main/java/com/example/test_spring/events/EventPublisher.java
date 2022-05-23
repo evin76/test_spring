@@ -44,6 +44,12 @@ public class EventPublisher {
     private void logEvent(Object event) {
         if (event instanceof BasicEvent) {
             System.out.println("eventName " + ((BasicEvent) event).getMessage().getClass() + "event " + ((BasicEvent) event).getMessage() + " publishing...");
+        } else if (event instanceof AsyncEvent) {
+            System.out.println("eventName " + ((AsyncEvent) event).getMessage().getClass() + "event " + ((AsyncEvent) event).getMessage() + " publishing...");
+        } else if (event instanceof TransEventOne) {
+            System.out.println("eventName " + ((TransEventOne) event).getMessage().getClass() + "event " + ((TransEventOne) event).getMessage() + " publishing...");
+        } else if (event instanceof  TransEventTwo) {
+            System.out.println("eventName " + ((TransEventTwo) event).getMessage().getClass() + "event " + ((TransEventTwo) event).getMessage() + " publishing...");
         } else {
             System.out.println("eventName " + event.getClass() + "event " + event + " publishing ...");
         }
