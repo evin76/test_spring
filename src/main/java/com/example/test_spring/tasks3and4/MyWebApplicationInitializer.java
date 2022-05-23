@@ -1,4 +1,4 @@
-package com.example.test_spring;
+package com.example.test_spring.tasks3and4;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;

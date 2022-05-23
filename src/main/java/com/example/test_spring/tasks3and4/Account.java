@@ -1,4 +1,4 @@
-package com.example.test_spring;
+package com.example.test_spring.tasks3and4;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Profile;
